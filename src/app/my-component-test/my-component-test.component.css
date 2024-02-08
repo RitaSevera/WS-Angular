@@ -1,0 +1,13 @@
+h1 {
+  color: rgb(161, 245, 217);
+}
+
+h2 {
+  color: rgb(170, 245, 245);
+}
+.active {
+  color: blueviolet;
+}
+img {
+  max-width: 200px;
+}

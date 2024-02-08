@@ -1,0 +1,32 @@
+<h1> O meu nome é {{meuNome}}</h1>
+<h2>{{mensagem}}</h2>
+<img src="{{imagem}}">
+
+<hr>
+<h1> O meu nome é {{meuNome}}</h1>
+<h2>{{mensagem}}</h2>
+<img [src]="imagem">
+
+<button (click)="alterarImagem()">Alterar imagem</button>
+<button (click)="alterarImagem2()">Alterar imagem 2</button>
+<button (click)="meuNome = 'Rita Severa'">Alterar nome</button>
+
+<hr>
+
+<p [style.color]="pCorTexto" [style.backgroundColor]="pCorFundo">
+  O meu restaurante preferido é o Cantinho dos Bragança
+</p>
+
+<button (click)="alterarCor()" [disabled]="!pAlterarCores">Alterar cor do texto/fundo</button>
+<button (click)="alterarAtivo()">Desativar</button>
+
+<hr />
+
+<h3>{{ contador }}</h3>
+
+<button (click)="incrementar()">incrementar</button>
+
+<hr />
+<hr />
+<hr />
+<hr />

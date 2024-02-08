@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<h1>Lista de animais</h1>
+
+<div>
+  <ul>
+    @for (animal of animais; track $index) {
+      <li>
+      <app-lista-animais-item [animais]="animal"></app-lista-animais-item>
+      </li>
+    }
+  </ul>
+</div>
