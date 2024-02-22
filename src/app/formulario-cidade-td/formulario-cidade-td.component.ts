@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Icidade } from '../models/cidade.model';
-import { CidadesService } from '../services/cidades.service';
+import { CidadesService } from '../services/cidades-ls.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { tick } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-cidade-td',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './formulario-cidade-td.component.html',
   styleUrl: './formulario-cidade-td.component.css'
 })
 export class FormularioCidadeTdComponent {
-  idCidade: number = 0;
-  nomeCidade: string = '';
-  paisCidade: string = '';
-  populacaoCidade: number | undefined  = 0;  //podemos ter mais que um tipo
+  minhaCidade: Icidade = {
+    id: 0,
+    nome: '',
+    pais: '',
+    populacao: 0  //podemos ter mais que um tipo
+  }
+
 
   constructor(private cidadeService:CidadesService,
               private router: Router,
@@ -24,31 +29,25 @@ export class FormularioCidadeTdComponent {
   }
 
   ngOnInit(){
-    this.idCidade = parseInt(this.route.snapshot.paramMap.get('id') ??  '0') ; //ele e uma string e precisa de passar pra nr, dai o parseInt
+    this.minhaCidade.id = parseInt(this.route.snapshot.paramMap.get('id') ??  '0') ; //ele e uma string e precisa de passar pra nr, dai o parseInt
+    console.log('id', this.minhaCidade.id);
 
-    if(this.idCidade > 0){
-      let cidade: Icidade = this.cidadeService.read(this.idCidade);
-
-      this.nomeCidade = cidade.nome;
-      this.paisCidade = cidade.pais;
-      this.populacaoCidade = cidade.populacao;
+    if(this.minhaCidade.id > 0){
+      this.minhaCidade = this.cidadeService.read(this.minhaCidade.id);
+      console.log('cidade:', this.minhaCidade);
     }
 
-    console.log('id:',this.idCidade);
+    console.log('nome', this.minhaCidade.nome);
   }
 
   formSubmit(){
-    console.log('nome',this.nomeCidade)
+    console.log('nome',this.minhaCidade.nome)
 
-    let novaCidade: Icidade= {
-      id: 0,
-      nome:this.nomeCidade,
-      pais:this.paisCidade,
-      populacao:this.populacaoCidade
+    if(this.minhaCidade.id || 0 > 0){
+      this.cidadeService.update(this.minhaCidade);
+    }else{
+      this.cidadeService.create(this.minhaCidade);
     }
-
-    this.cidadeService.create(novaCidade);
-
     this.router.navigate(['/minha-lista']);
   }
 }

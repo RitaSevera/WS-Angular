@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { MinhaListaItemComponent } from '../minha-lista-item/minha-lista-item.component';
-import { CidadesService } from '../services/cidades.service';
+import { CidadesService } from '../services/cidades-api.service';
 import { Icidade } from '../models/cidade.model';
 import { Router, RouterLink } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-minha-lista',
   standalone: true,
-  imports: [MinhaListaItemComponent],
+  imports: [MinhaListaItemComponent, RouterLink, HttpClientModule],
+  providers: [CidadesService],
   templateUrl: './minha-lista.component.html',
   styleUrl: './minha-lista.component.css'
 })
@@ -22,7 +24,20 @@ export class MinhaListaComponent {
 
   constructor(private CidadesService: CidadesService, private router: Router){
      console.log('MinhaListaComponent.constructor()');
-  }
+     this.cidades = CidadesService.cidades;
+    }
+
+    limparDados():void{
+      this.CidadesService.limparDados();
+      setTimeout(()=>{
+        this.CidadesService.readAll().subscribe((cidades) => {
+          this.cidades = cidades
+        });
+      }, 2000);
+      //this.cidades = this.CidadesService.cidades;
+
+    }
+
   ngOnChange(){
     /* É executado sempre que o Angular deteta
 uma mudança em uma propriedade de entrada (@Input).
@@ -38,16 +53,16 @@ dados de entrada, como fazer requisições HTTP, atribuir
 valores a propriedades, etc…*/
     console.log('MinhaListaComponent.ngOnInit()');
 
-    this.CidadesService.readAll();
-    this.cidades = this.CidadesService.cidades;
+    this.CidadesService.readAll().subscribe((cidades) => {this.cidades = cidades});
+    //this.cidades = this.CidadesService.cidades;
   }
 
-  adicionarCidade(){
-    this.CidadesService.create({id: 0, nome: 'Paris', pais: 'França'})
-  }
+  // adicionarCidade(){
+  //   this.CidadesService.create({id: '', nome: 'Paris', pais: 'França'})
+  // }
 
   irAdicionarCidade(){
-    this.router.navigate(['/formulario-cidade-td']);
+    this.router.navigate(['/form-api']);
   }
 
   ngDoCheck(){
@@ -57,7 +72,7 @@ para verificar se há mudanças nos dados e atualizar a view. É
 usado para implementar uma lógica personalizada de
 deteção de mudanças, que pode ser mais complexa ou
 específica do que a padrão do Angular */
-    //console.log('MinhaListaComponent.ngDoCheck()');
+    console.log('MinhaListaComponent.ngDoCheck()');
   }
   ngAfterContentCheck(){
      /* É executado depois de cada ciclo
@@ -65,6 +80,7 @@ de deteção de mudanças do Angular, depois que o conteúdo
 projetado é verificado. É usado para realizar operações que
 dependem das mudanças no conteúdo projetado, como
 atualizar valores, aplicar estilos, etc… */
+  console.log('MinhaListaComponent.ngAfterContentChecked()');
 
   }
   ngAfterViewInit(){

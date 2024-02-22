@@ -1,34 +1,34 @@
 {{ arr }}
 
 <ul>
-  <li *ngFor="let item of arr">
+  <li *ngFor ="let item of arr">
     {{ item }}
   </li>
 </ul>
 
 <div>
-  <article *ngFor="let item of arr">
+  <article *ngFor ="let item of arr">
     {{ item }}
     <!-- ... -->
   </article>
 </div>
 
 <ul>
-  <li *ngFor="let item of arr; index as i">
+  <li *ngFor ="let item of arr; index as i">
     {{ item }} ({{ i }})
   </li>
 </ul>
 
 <ul>
-  <ng-template ngFor let-item [ngForOf]="arr" let-i="index">
+  <ng-template ngFor let-item [ngforof] ="arr" let-i="index">
     <li>{{ item }} ({{ i }})</li>
   </ng-template>
 </ul>
 
 <ul>
-  <li *ngFor="let item of arr; index as i; first as ePrimeiro">
+  <li *ngFor ="let item of arr; index as i; first as ePrimeiro">
     {{ item }} ({{ i }})
-    <b *ngIf="ePrimeiro">PRIMEIRO</b>
+    <b *ngIf ="ePrimeiro">PRIMEIRO</b>
   </li>
 </ul>
 

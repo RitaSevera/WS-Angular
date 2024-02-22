@@ -11,7 +11,7 @@ export class MyComponentTestComponent implements OnChanges{
   //@Input({ required: true, alias: 'meu-nome' }) meuNome: string = 'João';
   //@Input({ alias: 'meu-nome' }) meuNome: string = 'João';
   //@Input() meuNome: string = "Severa";
-  @Input('meu-nome') meuNome: string = "Severa"
+  @Input('meu-nome') meuNome: string = "Rita"
   mensagem = "Adoro comer! 🤤"
   imagem: string = "https://res.cloudinary.com/tf-lab/image/upload/w_3840,c_fill,q_auto,f_auto/restaurant/f804024c-6bea-48ba-aca8-d74914554139/07a313fe-5735-4ace-a9e7-1e0f8c6956c6.jpghttps://res.cloudinary.com/tf-lab/image/upload/w_3840,c_fill,q_auto,f_auto/restaurant/f804024c-6bea-48ba-aca8-d74914554139/07a313fe-5735-4ace-a9e7-1e0f8c6956c6.jpg";
 
@@ -39,7 +39,7 @@ export class MyComponentTestComponent implements OnChanges{
         console.log('O nome foi alterado para ' + changes['meuNome'].currentValue)
       }
       if(changes['meuNome2']){
-        
+
       }
     }
 

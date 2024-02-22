@@ -26,7 +26,7 @@ export class CidadesService {
     this.cidades = []; //limpar o array de cidades
 
     //refazer os dados
-    this.reporDados
+    this.reporDados();
 
   }
 
@@ -78,10 +78,10 @@ export class CidadesService {
     );*/
 
     const maxID: Icidade = this.cidades.reduce( //maxID e o objeto e nao so o ID
-      (max, item) => max.id > item.id ? max : item //se der erro por causa do tipo de dados: (max: ICidade, item: ICidade)
+      (max: Icidade, item: Icidade) => (max.id || 0) > (item.id || 0) ? max : item //se der erro por causa do tipo de dados: (max: ICidade, item: ICidade)
     );
 
-    novaCidade.id = maxID.id + 1;
+    novaCidade.id = maxID.id || 0+ 1;
 
     this.cidades.push(novaCidade);
     localStorage.setItem('cidades', JSON.stringify(this.cidades));
@@ -90,18 +90,26 @@ export class CidadesService {
   }
 
   readAll(): void {
-    let cidades: Array<Icidade> = JSON.parse(
-      localStorage.getItem('cidades') || ''
-    );
+    let cidades: Array<Icidade> = JSON.parse(localStorage.getItem('cidades') || '');
 
     this.cidades = cidades;
   }
 
-  read(cidade: Icidade): void {
-
+  read(id: number): Icidade {
+    return this.cidades.filter((x: Icidade) => x.id === id)[0];
   }
 
-  update(cidade: Icidade): void {}
+  update(cidade: Icidade): void {
+    let index: number = this.cidades.findIndex((x: Icidade) => x.id === cidade.id);
+    this.cidades[index] = cidade;
 
-  delete(cidade: Icidade): void {}
+    localStorage.setItem('cidades', JSON.stringify(this.cidades));
+  }
+
+  delete(cidade: Icidade): void {
+    let index: number = this.cidades.findIndex((x: Icidade) => x.id === cidade.id);
+    this.cidades.splice(index, 1);
+
+    localStorage.setItem('cidades', JSON.stringify(this.cidades))
+  }
 }

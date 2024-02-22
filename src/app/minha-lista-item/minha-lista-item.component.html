@@ -2,6 +2,7 @@
 <li>
   <b>{{cidade.nome}}</b>,
   {{cidade.pais}}
+  
   <small><i>
     (Pop.:
     @if (cidade.populacao && cidade.populacao >= 2000000) {
@@ -12,4 +13,7 @@
     }
     )
   </i></small>
+
+  <a [routerLink] = "['/form-api', cidade.id]">Editar </a>
+  <a (click)="del()">Eliminar</a>
 </li>

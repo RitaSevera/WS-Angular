@@ -7,6 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MinhaListaComponent } from './minha-lista/minha-lista.component';
 import { ListaAnimaisComponent } from './lista-animais/lista-animais.component';
 import { FormularioCidadeTdComponent } from './formulario-cidade-td/formulario-cidade-td.component';
+import { FormApiComponent } from './form-api/form-api.component';
 
 
 export const routes: Routes = [
@@ -35,7 +36,36 @@ export const routes: Routes = [
 
   {path: 'lista-animais', title: 'Lista Animais', component: ListaAnimaisComponent},
 
-  {path: 'formulario-cidade-td', title: 'Formulário Cidade', component: FormularioCidadeTdComponent},
+  {path: 'formulario-cidade-td',
+  children: [
+    {
+      path:'',
+      title: 'Criar - Formulário Cidade (Template-driven forms)',
+      component: FormularioCidadeTdComponent,
+    },
+    {
+      path: ':id',
+      title: 'Editar - Formulário Cidade (Template-driven forms)',
+      component: FormularioCidadeTdComponent,
+    }
+  ],
+},
+  {path: 'form-api',
+  children: [
+    {
+      path:':id',
+      title: 'Criar - Formulario Cidade (reactive forms)',
+      component: FormApiComponent
+    },
+    {
+      path:':id',
+      title: 'Editar - Formulario Cidade (reactive forms)',
+      component: FormApiComponent
+    }
+  ]
+},
+
+  {path: 'formulario-api', title: 'Formulário Cidade', component: FormularioCidadeTdComponent},
 
   {path: '', redirectTo: '/primeira', pathMatch: 'full'},
 

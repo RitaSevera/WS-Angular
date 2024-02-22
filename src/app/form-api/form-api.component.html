@@ -1,0 +1,26 @@
+<p>funciona</p>
+<form [formGroup]="form" (ngSubmit) ="formSubmit()">
+  <div>
+    <label for="nome">Nome</label><br>
+    <input type="text" name="nome" id="nome" formControlName="nome">
+    @if(form.controls['nome'].invalid){
+    <div>
+      @if (form.controls['nome'].errors) {
+        <span>Tem que inserir o nome</span>
+      }
+    </div>
+    }
+  </div><br>
+  <div>
+    <label for="nome">Pais</label><br>
+    <input type="text" name="pais" id="pais" formControlName="pais">
+  </div><br>
+    <div>
+      <label for="nome">População</label><br>
+      <input type="number" name="pop" id="pop" formControlName="populacao">
+    </div><br>
+    <div>
+      <button type="submit" [disabled]="form.invalid">Ok</button>
+    </div>
+</form>
+

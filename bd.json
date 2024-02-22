@@ -1,0 +1,35 @@
+{
+  "cidades": [
+    {
+      "id": "6aec",
+      "nome": "Porto",
+      "pais": "Portugal",
+      "populacao": 75422
+    },
+    {
+      "id": "3059",
+      "nome": "Aveiro",
+      "pais": "Portugal",
+      "populacao": 181494
+    },
+    {
+      "id": "2f14",
+      "nome": "Barcelona",
+      "pais": "Espanha",
+      "populacao": 1620343
+    },
+    {
+      "id": "75eb",
+      "nome": "Paris",
+      "pais": "França",
+      "populacao": 2148271
+    },
+    {
+      "id": "879f",
+      "nome": "Berlim",
+      "pais": "Alemanha",
+      "populacao": 364500
+    }
+  ],
+  "pais": []
+}
